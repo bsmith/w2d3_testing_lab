@@ -12,8 +12,9 @@ class TestCoffeeShop(unittest.TestCase):
         self.drink = Drink("mocha", 4, 5)
         self.food = Food("burger", 10, -10)
         self.coffee_shop = CoffeeShop("Starbucks", 50, [self.drink], [self.food])
-        
-    
+        self.coffee_shop.add_stock("mocha", 50)
+
+
     def test_coffee_shop_has_name(self):
         self.assertEqual("Starbucks", self.coffee_shop.name)
     
@@ -33,11 +34,19 @@ class TestCoffeeShop(unittest.TestCase):
     def test_increase_till(self):
         self.coffee_shop.increase_till(4)
         self.assertEqual(54, self.coffee_shop.till)
-    
-    
+
+
     def test_add_stock(self):
-        self.coffee_shop.add_stock("mocha", 100)
-        self.assertEqual(100, self.coffee_shop.stock["mocha"] )
+        self.coffee_shop.add_stock("espresso", 100)
+        self.assertEqual(100, self.coffee_shop.stock["espresso"] )
+
+    def test_try_removing_stock__empty(self):
+        self.assertFalse(self.coffee_shop.try_removing_stock("espresso"))
+
+    def test_try_removing_stock__nonempty(self):
+        self.coffee_shop.add_stock("espresso", 100)
+        self.assertTrue(self.coffee_shop.try_removing_stock("espresso"))
+        self.assertEqual(99, self.coffee_shop.stock["espresso"])
 
     def test_find_drink(self):
         drink_found = self.coffee_shop.find_drink("mocha")
@@ -80,8 +89,7 @@ class TestCoffeeShop(unittest.TestCase):
 
 
     def test_stock_value(self):
-        self.coffee_shop.add_stock("mocha", 100)
-        self.assertEqual(400, self.coffee_shop.stock_value())
+        self.assertEqual(200, self.coffee_shop.stock_value())
 
     
 

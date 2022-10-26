@@ -14,6 +14,13 @@ class CoffeeShop:
             self.stock[name] = self.stock[name] + amount
         else:
             self.stock[name] = amount
+    
+    def try_removing_stock(self, name):
+        if name in self.stock and self.stock[name] > 0:
+            self.stock[name] -= 1
+            return True
+        else:
+            return False
 
     def find_drink(self, drink_name):
         for drink in self.drinks:
