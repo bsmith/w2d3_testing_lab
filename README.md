@@ -4,7 +4,7 @@ Todo list:
 
 * ✓ Refactor code!
 * ✓ Review MVP brief and check all items completed
-* Refactor code!
+* ✓ Refactor code!
 * Review Extensions, check all items completed and refactor code
 * Refactor code!
 * Review Advanced Extensions, complete stock management and refactor code

@@ -9,8 +9,8 @@ class TestFood(unittest.TestCase):
     def test_food_has_name(self):
         self.assertEqual("burger", self.food.name)
 
-    def test_price_has_value(self):
+    def test_price_has_price(self):
         self.assertEqual(10, self.food.price)
     
-    def test_food_has_caffeine(self):
+    def test_food_has_rejuvenation(self):
         self.assertEqual(-10, self.food.rejuvenation)
