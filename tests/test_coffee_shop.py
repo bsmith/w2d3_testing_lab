@@ -79,6 +79,10 @@ class TestCoffeeShop(unittest.TestCase):
         self.assertEqual(58, self.coffee_shop.till)
 
 
+    def test_stock_value(self):
+        self.coffee_shop.add_stock("mocha", 100)
+        self.assertEqual(400, self.coffee_shop.stock_value())
+
     
 
 
