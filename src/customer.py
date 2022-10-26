@@ -9,5 +9,6 @@ class Customer:
     def reduce_money(self, amount):
         self.wallet -= amount
 
-
-            
+    def add_or_reduce_energy(self, amount):
+        self.energy += amount
+    

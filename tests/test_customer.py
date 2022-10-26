@@ -21,11 +21,17 @@ class TestCustomer(unittest.TestCase):
     def test_has_energy(self):
         self.assertEqual(0, self.customer.energy)
 
-
     def test_reduce_money(self):
         self.customer.reduce_money(5)
         self.assertEqual(15, self.customer.wallet)
 
+    def test_add_or_reduce_energy__add(self):
+        self.customer.add_or_reduce_energy(5)
+        self.assertEqual(5, self.customer.energy)
+        
+    def test_add_or_reduce_energy__reduce(self):
+        self.customer.add_or_reduce_energy(-5)
+        self.assertEqual(-5, self.customer.energy)
     
     
     
