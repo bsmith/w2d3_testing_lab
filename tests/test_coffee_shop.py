@@ -17,7 +17,7 @@ class TestCoffeeShop(unittest.TestCase):
     def test_coffee_shop_has_name(self):
         self.assertEqual("Starbucks", self.coffee_shop.name)
     
-    
+
     def test_coffee_shop_till_amount(self):
         self.assertEqual(50, self.coffee_shop.till)
     
@@ -34,6 +34,10 @@ class TestCoffeeShop(unittest.TestCase):
         self.coffee_shop.increase_till(4)
         self.assertEqual(54, self.coffee_shop.till)
     
+    
+    def test_add_stock(self):
+        self.coffee_shop.add_stock("mocha", 100)
+        self.assertEqual(100, self.coffee_shop.stock["mocha"] )
 
     def test_find_drink(self):
         drink_found = self.coffee_shop.find_drink("mocha")
