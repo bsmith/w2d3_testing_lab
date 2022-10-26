@@ -10,8 +10,10 @@ class TestCoffeeShop(unittest.TestCase):
         self.customer = Customer("Alan", 20 , 30 )
         self.customer2 = Customer("Joy", 30 , 14 )
         self.drink = Drink("mocha", 4, 5)
+        self.drink2 = Drink("espresso", 4, 5)
+        self.drinks = [self.drink, self.drink2]
         self.food = Food("burger", 10, -10)
-        self.coffee_shop = CoffeeShop("Starbucks", 50, [self.drink], [self.food])
+        self.coffee_shop = CoffeeShop("Starbucks", 50, self.drinks, [self.food])
         self.coffee_shop.add_stock("mocha", 50)
 
 
@@ -58,28 +60,26 @@ class TestCoffeeShop(unittest.TestCase):
         self.assertEqual("burger", food_found.name) 
 
 
-    def test_can_sell_drink(self):
+    def test_sell_drink__allowed(self):
         self.coffee_shop.sell_drink(self.customer, "mocha")
         self.assertEqual(16, self.customer.wallet)
         self.assertEqual(5, self.customer.energy)
         self.assertEqual(54, self.coffee_shop.till)
 
+    def test_sell_drink__no_stock(self):
+        self.coffee_shop.sell_drink(self.customer, "espresso")
+        self.assertEqual(20, self.customer.wallet)
+        self.assertEqual(0, self.customer.energy)
+        self.assertEqual(50, self.coffee_shop.till)
 
-    def test_can_sell_food(self):
-        self.coffee_shop.sell_food(self.customer, "burger")
-        self.assertEqual(10, self.customer.wallet)
-        self.assertEqual(-10, self.customer.energy)
-        self.assertEqual(60, self.coffee_shop.till)
-
-
-    def test_cannot_sell_underage(self):
+    def test_sell_drink__underage(self):
         self.coffee_shop.sell_drink(self.customer2, "mocha")
         self.assertEqual(30, self.customer2.wallet)
         self.assertEqual(0, self.customer2.energy)
         self.assertEqual(50, self.coffee_shop.till)
 
 
-    def test_cannot_sell_energy_levels(self):
+    def test_sell_drink__high_energy(self):
         self.coffee_shop.sell_drink(self.customer, "mocha")
         self.coffee_shop.sell_drink(self.customer, "mocha")
         self.coffee_shop.sell_drink(self.customer, "mocha")
@@ -87,6 +87,12 @@ class TestCoffeeShop(unittest.TestCase):
         self.assertEqual(10, self.customer.energy)
         self.assertEqual(58, self.coffee_shop.till)
 
+
+    def test_sell_food(self):
+        self.coffee_shop.sell_food(self.customer, "burger")
+        self.assertEqual(10, self.customer.wallet)
+        self.assertEqual(-10, self.customer.energy)
+        self.assertEqual(60, self.coffee_shop.till)
 
     def test_stock_value(self):
         self.assertEqual(200, self.coffee_shop.stock_value())

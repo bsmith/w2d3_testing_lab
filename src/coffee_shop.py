@@ -37,9 +37,10 @@ class CoffeeShop:
     def sell_drink(self, customer, drink_name):
         drink = self.find_drink(drink_name)
         if customer.age >= 16 and customer.energy < 10:
-                customer.reduce_money(drink.price)
-                customer.add_or_reduce_energy(drink.caffeine_level)
-                self.increase_till(drink.price)
+                if drink and self.try_removing_stock(drink_name):
+                    customer.reduce_money(drink.price)
+                    customer.add_or_reduce_energy(drink.caffeine_level)
+                    self.increase_till(drink.price)
     
 
     def sell_food(self, customer, food_name):
@@ -52,7 +53,8 @@ class CoffeeShop:
     def stock_value(self):
         total_value = 0
         for drink in self.drinks:
-            total_value += drink.price * self.stock[drink.name]
+            if drink.name in self.stock:
+                total_value += drink.price * self.stock[drink.name]
         return total_value
 
 
