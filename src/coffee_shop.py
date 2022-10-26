@@ -9,6 +9,8 @@ class CoffeeShop:
 
     def sell_drink(self, customer, drink_name):
         for drink in self.drinks:
-            if drink_name == drink.name:
+            if drink_name == drink.name and customer.age >= 16 and customer.energy < 10:
                 customer.reduce_money(drink.price)
+                customer.energy += drink.caffeine_level
                 self.increase_till(drink.price)
+                

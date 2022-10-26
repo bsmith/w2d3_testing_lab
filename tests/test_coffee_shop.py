@@ -25,7 +25,23 @@ class TestCoffeeShop(unittest.TestCase):
         self.assertEqual(54, self.coffee_shop.till)
 
     def test_can_sell_drink(self):
-        self.customer.wallet = 20
         self.coffee_shop.sell_drink(self.customer, "mocha")
         self.assertEqual(16, self.customer.wallet)
+        self.assertEqual(5, self.customer.energy)
         self.assertEqual(54, self.coffee_shop.till)
+
+    def test_cannot_sell_underage(self):
+        self.coffee_shop.sell_drink(self.customer2, "mocha")
+        self.assertEqual(30, self.customer2.wallet)
+        self.assertEqual(0, self.customer2.energy)
+        self.assertEqual(50, self.coffee_shop.till)
+
+    def test_cannot_sell_energy_levels(self):
+        self.coffee_shop.sell_drink(self.customer, "mocha")
+        self.coffee_shop.sell_drink(self.customer, "mocha")
+        self.coffee_shop.sell_drink(self.customer, "mocha")
+        self.assertEqual(12, self.customer.wallet)
+        self.assertEqual(10, self.customer.energy)
+        self.assertEqual(58, self.coffee_shop.till)
+
+

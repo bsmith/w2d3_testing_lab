@@ -23,7 +23,6 @@ class TestCustomer(unittest.TestCase):
 
 
     def test_reduce_money(self):
-        self.customer.wallet = 20
         self.customer.reduce_money(5)
         self.assertEqual(15, self.customer.wallet)
 
