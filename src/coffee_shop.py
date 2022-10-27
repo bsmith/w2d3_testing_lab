@@ -5,7 +5,7 @@ class CoffeeShop:
         self.drinks = drinks
         self.foods = foods
         self.stock = {}
-    
+
     def increase_till(self, amount):
         self.till += amount
 
@@ -14,7 +14,7 @@ class CoffeeShop:
             self.stock[name] = self.stock[name] + amount
         else:
             self.stock[name] = amount
-    
+
     def try_removing_stock(self, name):
         if name in self.stock and self.stock[name] > 0:
             self.stock[name] -= 1
@@ -41,7 +41,7 @@ class CoffeeShop:
                     customer.reduce_money(drink.price)
                     customer.add_or_reduce_energy(drink.caffeine_level)
                     self.increase_till(drink.price)
-    
+
 
     def sell_food(self, customer, food_name):
         food = self.find_food(food_name)
@@ -56,8 +56,3 @@ class CoffeeShop:
             if drink.name in self.stock:
                 total_value += drink.price * self.stock[drink.name]
         return total_value
-
-
-   
-   
-   
